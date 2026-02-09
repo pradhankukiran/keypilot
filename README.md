@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Keypilot
+
+Generate SEO articles from keyword CSVs using a 5-step LLM pipeline with real-time streaming.
+
+## How It Works
+
+Upload a CSV of keywords and configure your article preferences. Keypilot runs them through five sequential steps, streaming each step's output in real time:
+
+1. **Cluster** — Groups keywords into topical clusters (Cerebras / Llama 3.1 8B)
+2. **Outline** — Generates a structured article outline from the clusters (Groq / Llama 3.3 70B)
+3. **Draft** — Writes the initial full article from the outline (Groq / Llama 3.3 70B)
+4. **Refine** — Edits for flow, readability, and consistency (Cerebras / GPT-OSS 120B)
+5. **Polish** — Final grammar, formatting, and keyword integration pass (OpenRouter / GPT-OSS 120B)
+
+## Configuration Options
+
+| Option | Description |
+|---|---|
+| Article Type | How-to guide, listicle, comparison, ultimate guide, product roundup |
+| Target Length | ~500 to ~4,000 words |
+| Tone | e.g. professional, casual, authoritative |
+| Style | e.g. data-driven, narrative, conversational |
+| Target Audience | e.g. small business owners, beginner developers |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- API keys for [Groq](https://console.groq.com/), [Cerebras](https://cloud.cerebras.ai/), and [OpenRouter](https://openrouter.ai/)
+
+### Setup
+
+```bash
+git clone <repo-url>
+cd keypilot
+npm install
+```
+
+Create a `.env.local` file:
+
+```
+GROQ_API_KEY=your_groq_key
+CEREBRAS_API_KEY=your_cerebras_key
+OPENROUTER_API_KEY=your_openrouter_key
+```
+
+### Run
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Framework** — Next.js 16 (App Router, Turbopack)
+- **AI SDK** — Vercel AI SDK v6 with `streamText`
+- **Styling** — Tailwind CSS v4 with custom cream/accent theme
+- **Streaming** — Server-Sent Events (SSE) with per-step token deltas
