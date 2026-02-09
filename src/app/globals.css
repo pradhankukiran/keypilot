@@ -1,26 +1,70 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf8f5;
+  --foreground: #2a2320;
+  --card: #fffefb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a1512;
+    --foreground: #e8e0d8;
+    --card: #2f2722;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Cream neutrals */
+  --color-cream-50: #faf8f5;
+  --color-cream-100: #f5f0ea;
+  --color-cream-200: #e8e0d8;
+  --color-cream-300: #d6ccc2;
+  --color-cream-400: #a89f95;
+  --color-cream-500: #8a7f74;
+  --color-cream-600: #6e635a;
+  --color-cream-700: #574d44;
+  --color-cream-800: #3d342d;
+  --color-cream-900: #2a2320;
+  --color-cream-950: #1a1512;
+
+  /* Accent — Warm Sienna */
+  --color-accent-400: #c08b5e;
+  --color-accent-500: #a06b3c;
+  --color-accent-600: #8b572a;
+  --color-accent-700: #744822;
+
+  /* Success — Sage Green */
+  --color-success-500: #6b8f5e;
+
+  /* Danger — Brick Red */
+  --color-danger-50: #fdf5f3;
+  --color-danger-200: #e5c4bb;
+  --color-danger-400: #c27560;
+  --color-danger-500: #a8523b;
+  --color-danger-600: #8f3e29;
+  --color-danger-700: #7a3220;
+  --color-danger-900: #4a201a;
+  --color-danger-950: #2d1410;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Warm prose overrides for typography plugin */
+.prose-stone :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  color: var(--color-accent-600);
+}
+.prose-stone :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
+  color: var(--color-accent-700);
 }

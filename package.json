@@ -9,13 +9,22 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/cerebras": "^2.0.31",
+    "@ai-sdk/groq": "^3.0.22",
+    "@openrouter/ai-sdk-provider": "^2.1.1",
+    "@tailwindcss/typography": "^0.5.19",
+    "ai": "^6.0.77",
     "next": "16.1.6",
+    "papaparse": "^5.5.3",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/papaparse": "^5.5.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
